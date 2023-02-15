@@ -62,34 +62,42 @@ class _NotebooksState extends State<Notebooks> {
         title: const Text('Edit'),
       ),
       body: Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Focus(
-            autofocus: true,
-            onKey: (FocusNode node, RawKeyEvent event) {
-              var retString = handleKeyboard(event);
-              if (retString == "") {
-                return KeyEventResult.ignored;
-              } else {
-                setState(() {
-                  _text += '[' + retString + ']';
-                });
-                return KeyEventResult.handled;
-              }
-            },
-            child: Column(
-              children: <Widget>[
-                TextField(
-                  controller: TextEditingController(text: _current),
-                  maxLines: 20,
-                  style: const TextStyle(color: Colors.black),
-                  onChanged: (text) {
-                    _current = text;
-                  },
-                ),
-                Text(_text),
-              ],
-            )),
-      ),
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              Focus(
+                  child: TextField(
+                controller: TextEditingController(text: _current),
+                maxLines: 20,
+                style: const TextStyle(color: Colors.black),
+                onChanged: (text) {
+                  _current = text;
+                },
+              )),
+              const Divider(
+                height: 20,
+                thickness: 5,
+                indent: 0,
+                endIndent: 0,
+                color: Colors.black,
+              ),
+              Focus(
+                child: Text(_text),
+                onKey: (FocusNode node, RawKeyEvent event) {
+                  var retString = handleKeyboard(event);
+                  if (retString == "") {
+                    return KeyEventResult.ignored;
+                  } else {
+                    setState(() {
+                      _text += '[' + retString + ']';
+                    });
+                    //return KeyEventResult.ignored;
+                    return KeyEventResult.handled;
+                  }
+                },
+              ),
+            ],
+          )),
     );
   }
 }
