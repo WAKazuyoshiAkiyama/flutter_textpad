@@ -33,7 +33,7 @@ class Notebooks extends StatefulWidget {
 String handleKeyboard(RawKeyEvent event) {
   print(event);
 
-  var KeyLabel = event.logicalKey.keyLabel.isNotEmpty
+  var keyLabel = event.logicalKey.keyLabel.isNotEmpty
       ? event.logicalKey.keyLabel
       : event.physicalKey.debugName.toString();
 
