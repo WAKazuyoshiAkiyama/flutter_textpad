@@ -69,6 +69,8 @@ class _NotebooksState extends State<Notebooks> {
               var retString = handleKeyboard(event);
               if (retString == "") {
                 return KeyEventResult.ignored;
+              } else if (retString.contains(RegExp("Key.*_[A-Z]\$"))) {
+                return KeyEventResult.ignored;
               } else {
                 setState(() {
                   _text += '[' + retString + ']';
